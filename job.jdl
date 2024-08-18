@@ -1,0 +1,26 @@
+# Invoke Singularity
+#
+universe   = vanilla
+executable = executable.sh
+
+should_transfer_files = Yes
+when_to_transfer_output = ON_EXIT
+
+
+transfer_input_files = ./bts.py
+
+Log    = /scratch365/palarcon/Scene-Reconstruction/BTS/logs/condor/$(Cluster).log
+Output = /scratch365/palarcon/Scene-Reconstruction/BTS/logs/condor/$(Cluster)-$(Process).out
+Error  = /scratch365/palarcon/Scene-Reconstruction/BTS/logs/condor/$(Cluster)-$(Process).err
+
+# Enable Singularity feature
+#+SingularityImage = "/afs/crc.nd.edu/x86_64_linux/s/singularity/images/pytorch-1.11.sif"
++SingularityImage = "/scratch365/palarcon/Scene-Reconstruction/pytorch-1.11.sif"
+
+
+
+request_gpus   = 2
+request_memory = 64 Gb
+request_cpus   = 4
+
+Queue 1
